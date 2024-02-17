@@ -7,12 +7,13 @@
       data-testid="search-input"
       placeholder="Search services"
     >
+
     <ul
-      v-if="services.length"
+      v-if="paginatedServices.length"
       class="catalog"
     >
       <li
-        v-for="service in services"
+        v-for="service in paginatedServices"
         :key="service.id"
         class="service"
       >
@@ -24,6 +25,7 @@
         </div>
       </li>
     </ul>
+
     <div
       v-else
       data-testid="no-results"
@@ -36,12 +38,15 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import useServices from '@/composables/useServices'
+import usePagination from '@/composables/usePagination'
 
 export default defineComponent({
   name: 'ServiceCatalog',
   setup() {
     // Import services from the composable
-    const { services, loading } = useServices()
+    const { services, loading, getServices } = useServices()
+
+    const { currentPage, totalPages, paginatedServices } = usePagination(services)
 
     // Set the search string to a Vue ref
     const searchQuery = ref('')
@@ -50,6 +55,9 @@ export default defineComponent({
       services,
       loading,
       searchQuery,
+      currentPage,
+      totalPages,
+      paginatedServices,
     }
   },
 })
