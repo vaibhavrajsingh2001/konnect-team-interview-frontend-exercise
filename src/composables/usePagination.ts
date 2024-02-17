@@ -1,6 +1,12 @@
 import { ref, computed, type Ref } from 'vue'
 import type { Service } from '@/types'
 
+/**
+ * Using the offset and limit way to paginate the services.
+ *
+ * Limit is the number of services to be displayed, which is the pageSize.
+ * Offset is the starting index of the services to be displayed, which is calculated by (currentPage - 1) * pageSize.
+ */
 export default function usePagination(services: Ref<Service[]>, pageSize = 10) {
 
   const currentPage = ref(1)
@@ -28,6 +34,7 @@ export default function usePagination(services: Ref<Service[]>, pageSize = 10) {
   return {
     currentPage,
     totalPages,
+    totalCount,
     paginatedServices,
     nextPage,
     previousPage,

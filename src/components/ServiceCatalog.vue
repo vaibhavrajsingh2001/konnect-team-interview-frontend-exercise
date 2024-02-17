@@ -9,23 +9,27 @@
       @input="searchHandler"
     >
 
-    <ul
-      v-if="paginatedServices.length"
-      class="catalog"
-    >
-      <li
-        v-for="service in paginatedServices"
-        :key="service.id"
-        class="service"
-      >
-        <div>
-          <p>
-            {{ service.name }}
-          </p>
-          <p>{{ service.description }}</p>
-        </div>
-      </li>
-    </ul>
+    <template v-if="paginatedServices.length">
+      <ul class="catalog">
+        <li
+          v-for="service in paginatedServices"
+          :key="service.id"
+          class="service"
+        >
+          <div>
+            <p>
+              {{ service.name }}
+            </p>
+            <p>{{ service.description }}</p>
+          </div>
+        </li>
+      </ul>
+
+      <k-pagination
+        v-bind="paginationParams.props"
+        v-on="paginationParams.handlers"
+      />
+    </template>
 
     <div
       v-else
@@ -37,17 +41,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
+
+import KPagination from '@/components/KPagination.vue'
+
 import useServices from '@/composables/useServices'
 import usePagination from '@/composables/usePagination'
 
 export default defineComponent({
   name: 'ServiceCatalog',
+  components: {
+    KPagination,
+  },
   setup() {
+    const pageSize = 10
+
     // Import services from the composable
     const { services, loading, getServices } = useServices()
 
-    const { currentPage, totalPages, paginatedServices } = usePagination(services)
+    const { currentPage, totalPages, totalCount, paginatedServices, nextPage, previousPage } = usePagination(services, pageSize)
 
     // Set the search string to a Vue ref
     const searchQuery = ref('')
@@ -57,13 +69,29 @@ export default defineComponent({
       getServices(q)
     }
 
+    // To reduce prop pollution in the template, using a computed property to pass
+    // props and event handlers to the KPagination component
+    const paginationParams = computed(() => ({
+      props: {
+        pageSize,
+        currentPage: currentPage.value,
+        totalCount: totalCount.value,
+        totalPages: totalPages.value,
+      },
+      handlers: {
+        next: nextPage,
+        previous: previousPage,
+      },
+    }))
+
     return {
       loading,
       searchQuery,
-      currentPage,
-      totalPages,
       paginatedServices,
+      paginationParams,
       searchHandler,
+      nextPage,
+      previousPage,
     }
   },
 })
