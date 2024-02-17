@@ -12,9 +12,10 @@
     <template v-if="paginatedServices.length">
       <ul class="catalog">
         <li
-          v-for="service in paginatedServices"
+          v-for="(service, index) in paginatedServices"
           :key="service.id"
           class="service"
+          @click="selectedServiceIndex = index"
         >
           <div>
             <p>
@@ -54,6 +55,7 @@ export default defineComponent({
     KPagination,
   },
   setup() {
+    // Fixed page size
     const pageSize = 10
 
     // Import services from the composable
@@ -63,6 +65,8 @@ export default defineComponent({
 
     // Set the search string to a Vue ref
     const searchQuery = ref('')
+    // The index of the selected service on the current page
+    const selectedServiceIndex = ref(-1)
 
     // Extract the search string from the event, reset pagination and call the getServices method
     const searchHandler = (event: Event) => {
@@ -86,14 +90,22 @@ export default defineComponent({
       },
     }))
 
+    // A computed property to get the selected service data
+    // This service will be shown in a modal
+    const selectedServiceData = computed(() => {
+      if (selectedServiceIndex.value < 0 || selectedServiceIndex.value >= paginatedServices.value.length) return null
+
+      return paginatedServices.value[selectedServiceIndex.value]
+    })
+
     return {
       loading,
       searchQuery,
       paginatedServices,
       paginationParams,
       searchHandler,
-      nextPage,
-      previousPage,
+      selectedServiceIndex,
+      selectedServiceData,
     }
   },
 })
