@@ -54,6 +54,10 @@ export default defineComponent({
     },
     // Return the index of the last item on the current page
     lastItemIndex() {
+      // If there is only one page, the total count is the last item index
+      // e.g. if there are only 6 items, then only 1 page will be shown, so the last item index will be 6
+      if (this.totalPages === 1) return this.totalCount
+
       /**
        * In case pageSize === 10
        * - If the current page is 1, the last item is 10
