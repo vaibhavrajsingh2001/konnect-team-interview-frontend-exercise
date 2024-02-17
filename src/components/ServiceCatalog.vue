@@ -1,13 +1,24 @@
 <template>
   <div class="service-catalog">
-    <h1>Service Hub</h1>
-    <input
-      v-model="searchQuery"
-      class="search-input"
-      data-testid="search-input"
-      placeholder="Search services"
-      @input="searchHandler"
-    >
+    <div class="page-header">
+      <div class="page-title">
+        <h1>Service Hub</h1>
+        <h2>Organize services, manage and track versioning and API service documentation.</h2>
+      </div>
+      <div class="action-bar">
+        <input
+          v-model="searchQuery"
+          v-debounce:350="searchHandler"
+          class="search-input"
+          data-testid="search-input"
+          placeholder="Search"
+        >
+
+        <button class="create-service">
+          + Service Package
+        </button>
+      </div>
+    </div>
 
     <template v-if="paginatedServices.length">
       <ul class="catalog">
@@ -82,8 +93,7 @@ export default defineComponent({
     const selectedServiceIndex = ref(-1)
 
     // Extract the search string from the event, reset pagination and call the getServices method
-    const searchHandler = (event: Event) => {
-      const q = (event.target as HTMLInputElement).value
+    const searchHandler = (q: string) => {
       currentPage.value = 1
       getServices(q)
     }
@@ -135,9 +145,71 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .service-catalog {
-  margin: 2rem auto;
-  max-width: 1366px;
-  padding: 0 20px;
+  // Center the content via margin auto on x-axis
+  margin: 4rem auto;
+  // Add padding to the sides
+  padding: 0 4rem;
+  max-width: 128rem;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 2rem;
+
+  .action-bar {
+    height: 4.4rem;
+    display: flex;
+    column-gap: 2.4rem;
+
+    .search-input {
+      width: 21rem;
+      padding: 1rem 1.6rem;
+      padding-left: 0.8rem;
+      border-radius: 0.4rem;
+      gap: 8px;
+
+      border: 1px solid #E7E7EC;
+    }
+
+    button.create-service {
+      width: 20rem;
+      padding: 1.2rem 2.4rem;
+      padding-left: 1.6rem;
+      border: none;
+      border-radius: 10rem;
+      gap: 0.8rem;
+      background: #07A88D;
+      color: #FFFFFF;
+      font-family: Inter;
+      font-weight: 600;
+      line-height: 2rem;
+      letter-spacing: 0px;
+      text-align: center;
+    }
+  }
+
+  .page-title {
+    color: #3C4557;
+    letter-spacing: 0px;
+    text-align: left;
+
+    h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 3.6rem;
+      margin: 0;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 400;
+      line-height: 2.4rem;
+      margin: 1.6rem 0 0 0;
+    }
+  }
+
 }
 
 .catalog {
@@ -145,6 +217,7 @@ export default defineComponent({
   flex-wrap: wrap;
   list-style: none;
   margin: 20px 0 0 0;
+  padding: 0;
 }
 
 .service {
@@ -162,9 +235,5 @@ export default defineComponent({
   p {
     color: #666;
   }
-}
-
-input {
-  padding: 8px 4px;
 }
 </style>

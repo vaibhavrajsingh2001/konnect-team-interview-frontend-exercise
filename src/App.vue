@@ -19,10 +19,18 @@ export default defineComponent({
 
 <style lang="scss">
 // Unscoped styles for html and body
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
 html {
   font-size: 10px;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -31,5 +39,6 @@ body {
   font-weight: 400;
   line-height: 1.2;
   margin: 0 auto;
+  background-color: #F8F8FA;
 }
 </style>
