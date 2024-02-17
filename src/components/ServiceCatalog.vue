@@ -38,6 +38,17 @@
     >
       No services
     </div>
+
+    <Teleport to="#k-modal-root">
+      <service-detail-modal
+        v-if="selectedServiceData"
+        :description="selectedServiceData.description"
+        :title="selectedServiceData.name"
+        :type="selectedServiceData.type"
+        :versions="selectedServiceData.versions"
+        @close="selectedServiceIndex = -1"
+      />
+    </Teleport>
   </div>
 </template>
 
@@ -45,6 +56,7 @@
 import { computed, defineComponent, ref } from 'vue'
 
 import KPagination from '@/components/KPagination.vue'
+import ServiceDetailModal from '@/components/ServiceDetailModal.vue'
 
 import useServices from '@/composables/useServices'
 import usePagination from '@/composables/usePagination'
@@ -53,6 +65,7 @@ export default defineComponent({
   name: 'ServiceCatalog',
   components: {
     KPagination,
+    ServiceDetailModal,
   },
   setup() {
     // Fixed page size
@@ -93,19 +106,28 @@ export default defineComponent({
     // A computed property to get the selected service data
     // This service will be shown in a modal
     const selectedServiceData = computed(() => {
+      // No. of items shown might be less than pageSize, hence use item count for max check instead of pageSize
       if (selectedServiceIndex.value < 0 || selectedServiceIndex.value >= paginatedServices.value.length) return null
 
       return paginatedServices.value[selectedServiceIndex.value]
     })
+
+    const serviceDetailModalParams = computed(() => ({
+      description: selectedServiceData.value?.description,
+      title: selectedServiceData.value?.name,
+      versions: selectedServiceData.value?.versions,
+      type: selectedServiceData.value?.type,
+    }))
 
     return {
       loading,
       searchQuery,
       paginatedServices,
       paginationParams,
-      searchHandler,
+      serviceDetailModalParams,
       selectedServiceIndex,
       selectedServiceData,
+      searchHandler,
     }
   },
 })
