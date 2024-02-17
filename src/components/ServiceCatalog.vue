@@ -64,8 +64,10 @@ export default defineComponent({
     // Set the search string to a Vue ref
     const searchQuery = ref('')
 
+    // Extract the search string from the event, reset pagination and call the getServices method
     const searchHandler = (event: Event) => {
       const q = (event.target as HTMLInputElement).value
+      currentPage.value = 1
       getServices(q)
     }
 
