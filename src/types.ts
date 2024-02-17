@@ -30,3 +30,9 @@ export interface Service {
   versions: Array<Version>;
   metrics?: Metrics;
 }
+
+export interface NetworkError {
+  message: string;
+  status?: number;
+  code?: string;
+}

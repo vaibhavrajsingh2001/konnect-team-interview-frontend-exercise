@@ -1,11 +1,12 @@
 <template>
   <div class="service-catalog">
-    <h1>Service Catalog</h1>
+    <h1>Service Hub</h1>
     <input
       v-model="searchQuery"
       class="search-input"
       data-testid="search-input"
       placeholder="Search services"
+      @input="searchHandler"
     >
 
     <ul
@@ -51,13 +52,18 @@ export default defineComponent({
     // Set the search string to a Vue ref
     const searchQuery = ref('')
 
+    const searchHandler = (event: Event) => {
+      const q = (event.target as HTMLInputElement).value
+      getServices(q)
+    }
+
     return {
-      services,
       loading,
       searchQuery,
       currentPage,
       totalPages,
       paginatedServices,
+      searchHandler,
     }
   },
 })
