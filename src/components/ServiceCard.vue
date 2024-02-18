@@ -17,10 +17,15 @@
       {{ description }}
     </p>
 
-    <div>
+    <div class="service-metrics-and-avatars">
       <ServiceMetrics
         v-if="metrics"
         v-bind="metrics"
+      />
+
+      <k-avatar-group
+        v-if="developers?.length"
+        :avatar-list="developers"
       />
     </div>
   </li>
@@ -28,13 +33,15 @@
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue'
 
-import ServiceMetrics from './ServiceMetrics.vue'
+import ServiceMetrics from '@/components/ServiceMetrics.vue'
+import KAvatarGroup from '@/components/KAvatarGroup.vue'
 import { ServiceStatus, type Developer, type Metrics } from '@/types'
 
 export default defineComponent({
   name: 'ServiceCard',
   components: {
     ServiceMetrics,
+    KAvatarGroup,
   },
   props: {
     name: {
@@ -147,6 +154,12 @@ export default defineComponent({
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
+  }
+
+  .service-metrics-and-avatars {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
   }
 }
 </style>

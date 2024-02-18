@@ -27,7 +27,7 @@
           :key="service.id"
           :configured="service.configured"
           :description="service.description"
-          :developers="getAllDeveloperList(service)"
+          :developers="getUniqueDeveloperList(service)"
           :metrics="service.metrics"
           :name="service.name"
           :published="service.published"
@@ -100,13 +100,17 @@ export default defineComponent({
       getServices(q)
     }
 
-    const getAllDeveloperList = (service: Service) => {
-      // Only need unique developers that are associated with the service versions, hence set is used
-      const developerList: Set<Developer> = new Set()
-      for (const version of service.versions) {
-        if (version.developer) developerList.add(version.developer)
+    const getUniqueDeveloperList = (service: Service): Array<Developer> => {
+      // Maintain a map of developer ID to developer object to only add unique developers
+      const developerMap: Record<string, Developer> = {}
+
+      for (const { developer } of service.versions) {
+        if (developer) {
+          developerMap[developer.id] = developer
+        }
       }
-      return Array.from(developerList)
+
+      return Object.values(developerMap)
     }
 
     // To reduce prop pollution in the template, using a computed property to pass
@@ -149,7 +153,7 @@ export default defineComponent({
       selectedServiceIndex,
       selectedServiceData,
       searchHandler,
-      getAllDeveloperList,
+      getUniqueDeveloperList,
     }
   },
 })
