@@ -1,17 +1,16 @@
 <template>
-  <div class="paginator">
-    <button
-      :disabled="disablePreviousButton"
-      @click="$emit('previous')"
-    >
-      &lt;—
+  <div class="k-pagination">
+    <button :disabled="disablePreviousButton" @click="$emit('previous')">
+      ←
     </button>
-    <span>{{ firstItemIndex }} to {{ lastItemIndex }} of {{ totalCount }} services</span>
-    <button
-      :disabled="disableNextButton"
-      @click="$emit('next')"
-    >
-      —&gt;
+
+    <span class="current-page">
+      {{ firstItemIndex }} to {{ lastItemIndex }}
+      <span class="total-count">of {{ totalCount }} services</span>
+    </span>
+
+    <button :disabled="disableNextButton" @click="$emit('next')">
+      →
     </button>
   </div>
 </template>
@@ -58,6 +57,9 @@ export default defineComponent({
       // e.g. if there are only 6 items, then only 1 page will be shown, so the last item index will be 6
       if (this.totalPages === 1) return this.totalCount
 
+      // If the current page is the last page, the total count is the last item index
+      if (this.currentPage === this.totalPages) return this.totalCount
+
       /**
        * In case pageSize === 10
        * - If the current page is 1, the last item is 10
@@ -77,7 +79,43 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.paginator {
-  text-align: center;
+.k-pagination {
+  display: flex;
+  gap: 2.4rem;
+  justify-content: center;
+  align-items: center;
+  line-height: 2rem;
+  font-size: 1.3rem;
+
+  button {
+    padding: 1.2rem;
+    background-color: transparent;
+    border-radius: 50%;
+    border: 1px solid #A6C6FF;
+    font-size: 1.8rem;
+    color: #1456CB;
+    cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+      color: #0000001A;
+      border: 1px solid #0000001A;
+    }
+  }
+
+  .current-page {
+    font-weight: 600;
+    color: #3C4557;
+    // Fixing the width so that the text doesn't jump around
+    // e.g. going from "1 to 10 of 100 services" to "11 to 20 of 100 services" would cause the text to jump
+    width: 14.5rem;
+    text-align: center;
+
+    .total-count {
+      font-weight: 500;
+      color: #707888;
+    }
+  }
+
 }
 </style>
