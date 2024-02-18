@@ -37,6 +37,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 header {
+  position: sticky;
+  top: 0;
   height: 7rem;
   display: flex;
   align-items: center;
