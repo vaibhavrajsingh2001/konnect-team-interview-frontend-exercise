@@ -1,3 +1,5 @@
+import { formatDistanceToNowStrict } from 'date-fns'
+
 export function humanizeNumber(candidate: number): string {
   if (Number.isNaN(candidate)) return '0'
 
@@ -14,4 +16,8 @@ export function humanizeNumber(candidate: number): string {
 
   // Rounding to 2 decimal places
   return Math.round(shortened * 100) / 100 + ['', 'k', 'm', 'b', 't'][unit]
+}
+
+export function fromNow(time: string) {
+  return formatDistanceToNowStrict(time, { addSuffix: true })
 }
