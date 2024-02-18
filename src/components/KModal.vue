@@ -43,21 +43,21 @@ export default defineComponent({
 
 <style lang="scss">
 .k-modal {
-  position: fixed;
-  inset: 0px;
+  align-items: center;
   background-color: rgb(0 0 0 / 0.5);
   display: flex;
+  inset: 0px;
   justify-content: center;
-  align-items: center;
+  position: fixed;
 }
 
 .k-modal-container {
-  max-width: 40vw;
-  max-height: 50vh;
-  overflow-y: auto;
-  border-radius: 0.4rem;
   background-color: #FFFFFF;
+  border-radius: 0.4rem;
   box-shadow: 0px 4px 30px 0px #00000033;
+  max-height: 50vh;
+  max-width: 40vw;
+  overflow-y: auto;
 }
 
 .k-modal-close {

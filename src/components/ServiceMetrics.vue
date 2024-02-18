@@ -88,23 +88,23 @@ export default defineComponent({
 
 <style lang="scss">
 .service-metrics {
+  color: #3C4557;
   font-size: 1.2rem;
   font-weight: 600;
-  color: #3C4557;
 }
 
 .service-metric-item {
-  margin-bottom: 0.5rem;
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 0.9rem;
+  margin-bottom: 0.5rem;
 
   .ellipse {
+    background-color: #4CAF50;
+    border-radius: 50%;
     display: inline-block;
     height: 0.6rem;
     width: 0.6rem;
-    background-color: #4CAF50;
-    border-radius: 50%;
   }
 
   // Colors for ellipses

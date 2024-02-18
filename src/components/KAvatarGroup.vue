@@ -71,22 +71,22 @@ export default defineComponent({
 }
 
 .k-avatar-extra {
-  height: 3.6rem;
-  width: 3.6rem;
-
-  display: inline-flex;
-  justify-content: center;
   align-items: center;
 
   background-color: #F1F1F8;
-  color: #777D8A;
-  font-size: 1.2rem;
-  font-weight: 600;
-  letter-spacing: 0.2rem;
-
-  border-radius: 50%;
   border: 1px solid #fff;
 
+  border-radius: 50%;
+  color: #777D8A;
+
   cursor: default;
+
+  display: inline-flex;
+  font-size: 1.2rem;
+  font-weight: 600;
+  height: 3.6rem;
+  justify-content: center;
+  letter-spacing: 0.2rem;
+  width: 3.6rem;
 }
 </style>

@@ -168,39 +168,39 @@ export default defineComponent({
 }
 
 .page-header {
+  align-items: start;
   display: flex;
   justify-content: space-between;
-  align-items: start;
   margin-bottom: 2rem;
 
   .action-bar {
-    height: 4.4rem;
-    display: flex;
     column-gap: 2.4rem;
+    display: flex;
+    height: 4.4rem;
 
     .search-input {
-      width: 21rem;
-      padding: 1rem 1.6rem;
-      padding-left: 0.8rem;
-      border-radius: 0.4rem;
-      gap: 8px;
 
       border: 1px solid #E7E7EC;
+      border-radius: 0.4rem;
+      gap: 8px;
+      padding: 1rem 1.6rem;
+      padding-left: 0.8rem;
+      width: 21rem;
     }
 
     button.create-service {
-      width: 20rem;
-      padding: 1.2rem 2.4rem;
-      padding-left: 1.6rem;
+      background: #07A88D;
       border: none;
       border-radius: 10rem;
-      background: #07A88D;
       color: #FFFFFF;
-      font-weight: 600;
-      line-height: 2rem;
       font-size: 1.6rem;
+      font-weight: 600;
       letter-spacing: 0px;
+      line-height: 2rem;
+      padding: 1.2rem 2.4rem;
+      padding-left: 1.6rem;
       text-align: center;
+      width: 20rem;
     }
   }
 

@@ -37,56 +37,56 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 header {
-  position: sticky;
-  top: 0;
-  height: 7rem;
-  display: flex;
   align-items: center;
-  justify-content: space-between;
 
   color: rgb(255 255 255 / 0.8);
+  display: flex;
+  height: 7rem;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
 }
 
 .nav {
-  height: 100%;
-  padding: 0 1.8rem;
-
-  flex-grow: 1;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
 
   background: linear-gradient(180deg, #09224F 0%, #073382 100%);
+  display: flex;
+
+  flex-grow: 1;
 
   font-size: 1.5rem;
   font-weight: 600;
-  line-height: 1.8rem;
+  height: 100%;
+  justify-content: space-between;
   letter-spacing: 0em;
+  line-height: 1.8rem;
+  padding: 0 1.8rem;
 }
 
 .org-setting {
-  display: flex;
-  column-gap: 2.6rem
+  column-gap: 2.6rem;
+  display: flex
 }
 
 .profile {
+  align-items: center;
+  background: #072863;
+  column-gap: 1.6rem;
+  display: flex;
+  font-weight: 500;
   height: 100%;
   padding: 0 2rem;
-  display: flex;
-  align-items: center;
-  column-gap: 1.6rem;
-  font-weight: 500;
-  background: #072863;
 }
 
 .avatar-container {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 100%;
+  align-items: center;
   background-color: #0A7FAE;
+  border-radius: 100%;
 
   display: flex;
+  height: 3rem;
   justify-content: center;
-  align-items: center;
+  width: 3rem;
 }
 </style>

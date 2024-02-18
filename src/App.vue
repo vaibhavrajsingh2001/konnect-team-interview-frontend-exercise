@@ -27,18 +27,18 @@ export default defineComponent({
 }
 
 html {
+  box-sizing: border-box;
   font-size: 10px;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
+  background-color: #F8F8FA;
+  color: #3C4557;
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 1.2;
   margin: 0 auto;
-  background-color: #F8F8FA;
-  color: #3C4557;
 }
 </style>

@@ -110,27 +110,27 @@ export default defineComponent({
 
 <style lang="scss">
 .service-card {
-  width: 42rem;
-  height: 24rem;
-  border-radius: 0.2rem;
   background-color: #FFFFFF;
+  border-radius: 0.2rem;
+  height: 24rem;
   padding: 2.5rem;
+  width: 42rem;
   // Sprinkle a little shadow if needed :)
   // box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 
   .service-card-header {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    height: 3.2rem;
+    display: flex;
     font-size: 1.2rem;
     font-weight: 400;
+    height: 3.2rem;
+    justify-content: space-between;
     line-height: 1.6rem;
     margin-bottom: 1rem;
 
     .version-badge {
-      border-radius: 10rem;
       background-color: #F2F6FE;
+      border-radius: 10rem;
       color: #5888DB;
       font-weight: 600;
       padding: 0.8rem 1.6rem;
@@ -138,28 +138,28 @@ export default defineComponent({
   }
 
   .service-name {
-    font-weight: 600;
     font-size: 2rem;
+    font-weight: 600;
     line-height: 2.4rem;
     margin-bottom: 1rem;
   }
 
   .service-description {
+    -webkit-box-orient: vertical;
+    color: #707888;
+    display: -webkit-box;
     font-size: 1.3rem;
     font-weight: 400;
+    -webkit-line-clamp: 1;
     line-height: 2rem;
-    color: #707888;
 
     overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
   }
 
   .service-metrics-and-avatars {
+    align-items: end;
     display: flex;
     justify-content: space-between;
-    align-items: end;
   }
 }
 </style>

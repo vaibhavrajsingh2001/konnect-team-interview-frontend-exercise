@@ -34,8 +34,8 @@ export default defineComponent({
 </script>
 <style lang="scss">
 .k-avatar {
+  border-radius: 50%;
   height: 3.6rem;
   width: 3.6rem;
-  border-radius: 50%;
 }
 </style>

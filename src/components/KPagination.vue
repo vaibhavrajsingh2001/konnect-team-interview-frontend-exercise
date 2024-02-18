@@ -80,40 +80,40 @@ export default defineComponent({
 
 <style lang="scss">
 .k-pagination {
+  align-items: center;
   display: flex;
+  font-size: 1.3rem;
   gap: 2.4rem;
   justify-content: center;
-  align-items: center;
   line-height: 2rem;
-  font-size: 1.3rem;
 
   button {
-    padding: 1.2rem;
     background-color: transparent;
-    border-radius: 50%;
     border: 1px solid #A6C6FF;
-    font-size: 1.8rem;
+    border-radius: 50%;
     color: #1456CB;
     cursor: pointer;
+    font-size: 1.8rem;
+    padding: 1.2rem;
 
     &:disabled {
-      cursor: not-allowed;
-      color: #0000001A;
       border: 1px solid #0000001A;
+      color: #0000001A;
+      cursor: not-allowed;
     }
   }
 
   .current-page {
-    font-weight: 600;
     color: #3C4557;
+    font-weight: 600;
+    text-align: center;
     // Fixing the width so that the text doesn't jump around
     // e.g. going from "1 to 10 of 100 services" to "11 to 20 of 100 services" would cause the text to jump
     width: 14.5rem;
-    text-align: center;
 
     .total-count {
-      font-weight: 500;
       color: #707888;
+      font-weight: 500;
     }
   }
 
