@@ -43,7 +43,7 @@ export default defineComponent({
 
 <style lang="scss">
 .k-modal {
-  position: absolute;
+  position: fixed;
   inset: 0px;
   background-color: rgb(0 0 0 / 0.5);
   display: flex;
