@@ -37,6 +37,7 @@
       </ul>
 
       <k-pagination
+        v-if="paginationParams.props.totalPages > 1"
         v-bind="paginationParams.props"
         v-on="paginationParams.handlers"
       />
