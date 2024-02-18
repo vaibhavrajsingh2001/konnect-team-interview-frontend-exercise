@@ -8,7 +8,7 @@
       <slot name="close">
         <div class="k-modal-close">
           <button @click="$emit('close')">
-            X
+            &#x58;
           </button>
         </div>
       </slot>
@@ -55,8 +55,9 @@ export default defineComponent({
   background-color: #FFFFFF;
   border-radius: 0.4rem;
   box-shadow: 0px 4px 30px 0px #00000033;
+  margin: 0 4rem;
   max-height: 50vh;
-  max-width: 40vw;
+  max-width: 83rem;
   overflow-y: auto;
 }
 
@@ -64,9 +65,26 @@ export default defineComponent({
   display: flex;
   justify-content: flex-end;
   padding: 1.5rem;
+  padding-bottom: 0rem;
 
   button {
+    align-items: center;
+    background-color: #BDD3F9FF;
+    border: 1px solid #00000033;
+    border-radius: 50%;
+    color: #003694FF;
     cursor: pointer;
+    display: inline-flex;
+    font-size: 1.6rem;
+    font-weight: 600;
+    height: 3rem;
+    justify-content: center;
+    padding: 1rem;
+    width: 3rem;
+
+    &:hover {
+      background-color: #8AB3FAFF;
+    }
   }
 }
 

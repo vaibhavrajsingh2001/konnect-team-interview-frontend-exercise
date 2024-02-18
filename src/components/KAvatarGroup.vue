@@ -61,6 +61,7 @@ export default defineComponent({
 </script>
 <style lang="scss">
 .k-avatar-group {
+  cursor: default;
   display: flex;
 }
 
@@ -78,8 +79,6 @@ export default defineComponent({
 
   border-radius: 50%;
   color: #777D8A;
-
-  cursor: default;
 
   display: inline-flex;
   font-size: 1.2rem;
