@@ -34,11 +34,11 @@ html {
 }
 
 body {
-  font-family: Inter, Arial, sans-serif;
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 1.2;
   margin: 0 auto;
   background-color: #F8F8FA;
+  color: #3C4557;
 }
 </style>
