@@ -1,6 +1,9 @@
 <template>
   <div class="k-pagination">
-    <button :disabled="disablePreviousButton" @click="$emit('previous')">
+    <button
+      :disabled="disablePreviousButton"
+      @click="$emit('previous')"
+    >
       ←
     </button>
 
@@ -9,7 +12,10 @@
       <span class="total-count">of {{ totalCount }} services</span>
     </span>
 
-    <button :disabled="disableNextButton" @click="$emit('next')">
+    <button
+      :disabled="disableNextButton"
+      @click="$emit('next')"
+    >
       →
     </button>
   </div>
