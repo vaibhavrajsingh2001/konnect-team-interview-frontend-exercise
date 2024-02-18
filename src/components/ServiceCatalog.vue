@@ -22,19 +22,18 @@
 
     <template v-if="paginatedServices.length">
       <ul class="catalog">
-        <li
+        <service-card
           v-for="(service, index) in paginatedServices"
           :key="service.id"
-          class="service"
+          :configured="service.configured"
+          :description="service.description"
+          :developers="getAllDeveloperList(service)"
+          :metrics="service.metrics"
+          :name="service.name"
+          :published="service.published"
+          :version-count="service.versions.length"
           @click="selectedServiceIndex = index"
-        >
-          <div>
-            <p>
-              {{ service.name }}
-            </p>
-            <p>{{ service.description }}</p>
-          </div>
-        </li>
+        />
       </ul>
 
       <k-pagination
@@ -68,15 +67,18 @@ import { computed, defineComponent, ref } from 'vue'
 
 import KPagination from '@/components/KPagination.vue'
 import ServiceDetailModal from '@/components/ServiceDetailModal.vue'
+import ServiceCard from '@/components/ServiceCard.vue'
 
 import useServices from '@/composables/useServices'
 import usePagination from '@/composables/usePagination'
+import type { Developer, Service } from '@/types'
 
 export default defineComponent({
   name: 'ServiceCatalog',
   components: {
     KPagination,
     ServiceDetailModal,
+    ServiceCard,
   },
   setup() {
     // Fixed page size
@@ -96,6 +98,15 @@ export default defineComponent({
     const searchHandler = (q: string) => {
       currentPage.value = 1
       getServices(q)
+    }
+
+    const getAllDeveloperList = (service: Service) => {
+      // Only need unique developers that are associated with the service versions, hence set is used
+      const developerList: Set<Developer> = new Set()
+      for (const version of service.versions) {
+        if (version.developer) developerList.add(version.developer)
+      }
+      return Array.from(developerList)
     }
 
     // To reduce prop pollution in the template, using a computed property to pass
@@ -138,6 +149,7 @@ export default defineComponent({
       selectedServiceIndex,
       selectedServiceData,
       searchHandler,
+      getAllDeveloperList,
     }
   },
 })
@@ -149,7 +161,6 @@ export default defineComponent({
   margin: 4rem auto;
   // Add padding to the sides
   padding: 0 4rem;
-  max-width: 128rem;
 }
 
 .page-header {
@@ -179,19 +190,17 @@ export default defineComponent({
       padding-left: 1.6rem;
       border: none;
       border-radius: 10rem;
-      gap: 0.8rem;
       background: #07A88D;
       color: #FFFFFF;
-      font-family: Inter;
       font-weight: 600;
       line-height: 2rem;
+      font-size: 1.6rem;
       letter-spacing: 0px;
       text-align: center;
     }
   }
 
   .page-title {
-    color: #3C4557;
     letter-spacing: 0px;
     text-align: left;
 
@@ -215,25 +224,9 @@ export default defineComponent({
 .catalog {
   display: flex;
   flex-wrap: wrap;
+  gap: 4rem;
   list-style: none;
-  margin: 20px 0 0 0;
+  margin-top: 2.4rem;
   padding: 0;
-}
-
-.service {
-  border: 1px solid #999;
-  border-radius: 10px;
-  margin: 6px;
-  padding: 8px 16px;
-  width: 200px;
-
-  p:first-of-type {
-    color: #333;
-    font-weight: 700;
-  }
-
-  p {
-    color: #666;
-  }
 }
 </style>

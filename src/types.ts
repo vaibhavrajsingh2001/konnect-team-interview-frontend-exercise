@@ -36,3 +36,9 @@ export interface NetworkError {
   status?: number;
   code?: string;
 }
+
+export enum ServiceStatus {
+  Published,
+  Unpublished,
+  InProgress,
+}
