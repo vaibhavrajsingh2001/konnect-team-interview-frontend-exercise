@@ -42,3 +42,9 @@ export enum ServiceStatus {
   Unpublished,
   InProgress,
 }
+
+export enum QueryParams {
+  Search = 'q',
+  Page = 'page',
+  SelectedService = 'service',
+}

@@ -7,9 +7,9 @@
       </div>
       <div class="action-bar">
         <input
+          id="search-input"
           v-model="searchQuery"
           v-debounce:350="searchHandler"
-          class="search-input"
           data-testid="search-input"
           placeholder="Search"
         >
@@ -64,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent, onBeforeMount, ref } from 'vue'
 
 import KPagination from '@/components/KPagination.vue'
 import ServiceDetailModal from '@/components/ServiceDetailModal.vue'
@@ -72,7 +72,8 @@ import ServiceCard from '@/components/ServiceCard.vue'
 
 import useServices from '@/composables/useServices'
 import usePagination from '@/composables/usePagination'
-import type { Developer, Service } from '@/types'
+import { QueryParams, type Developer, type Service } from '@/types'
+import useQueryParams from '@/composables/useQueryParams'
 
 export default defineComponent({
   name: 'ServiceCatalog',
@@ -84,20 +85,31 @@ export default defineComponent({
   setup() {
     // Fixed page size
     const pageSize = 10
-
-    // Import services from the composable
-    const { services, loading, getServices } = useServices()
-
-    const { currentPage, totalPages, totalCount, paginatedServices, nextPage, previousPage } = usePagination(services, pageSize)
-
     // Set the search string to a Vue ref
     const searchQuery = ref('')
     // The index of the selected service on the current page
     const selectedServiceIndex = ref(-1)
 
+    // Import services from the composable
+    const { services, loading, getServices } = useServices()
+    const { currentPage, totalPages, totalCount, paginatedServices, nextPage, previousPage } = usePagination(services, pageSize)
+    const { getQueryParam, updateQueryParams } = useQueryParams()
+
+    // const intialSelectedServiceIndex = getQueryParam(QueryParams.SelectedService)
+
+    onBeforeMount(() => {
+      const initialSearchQuery = getQueryParam(QueryParams.Search)
+      if (initialSearchQuery && typeof initialSearchQuery === 'string') {
+        searchQuery.value = initialSearchQuery
+      }
+
+      getServices(searchQuery.value)
+    })
+
     // Extract the search string from the event, reset pagination and call the getServices method
     const searchHandler = (q: string) => {
       currentPage.value = 1
+      updateQueryParams({ [QueryParams.Search]: q, [QueryParams.Page]: '1' })
       getServices(q)
     }
 
@@ -179,7 +191,7 @@ export default defineComponent({
     display: flex;
     height: 4.4rem;
 
-    .search-input {
+    #search-input {
 
       border: 1px solid #E7E7EC;
       border-radius: 0.4rem;

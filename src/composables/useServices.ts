@@ -1,4 +1,4 @@
-import { ref, onBeforeMount } from 'vue'
+import { ref } from 'vue'
 import axios, { type AxiosResponse } from 'axios'
 import type { NetworkError, Service } from '@/types'
 
@@ -36,7 +36,7 @@ export default function useServices() {
     }
   }
 
-  onBeforeMount(getServices)
+  // onBeforeMount(getServices)
 
   return {
     services,

@@ -18,6 +18,8 @@ export function humanizeNumber(candidate: number): string {
   return Math.round(shortened * 100) / 100 + ['', 'k', 'm', 'b', 't'][unit]
 }
 
+// Input: 2024-02-20T00:00:00.000Z
+// Output: 2 days ago
 export function fromNow(time: string) {
   return formatDistanceToNowStrict(time, { addSuffix: true })
 }
