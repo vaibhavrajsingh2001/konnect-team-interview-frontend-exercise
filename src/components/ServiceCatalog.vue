@@ -32,7 +32,7 @@
           :name="service.name"
           :published="service.published"
           :version-count="service.versions.length"
-          @click="selectedServiceIndex = index"
+          @click="serviceCardClickHandler(index)"
         />
       </ul>
 
@@ -57,14 +57,14 @@
         :title="selectedServiceData.name"
         :type="selectedServiceData.type"
         :versions="selectedServiceData.versions"
-        @close="selectedServiceIndex = -1"
+        @close="serviceCardClickHandler(-1)"
       />
     </Teleport>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeMount, ref } from 'vue'
+import { computed, defineComponent, onMounted, ref } from 'vue'
 
 import KPagination from '@/components/KPagination.vue'
 import ServiceDetailModal from '@/components/ServiceDetailModal.vue'
@@ -90,27 +90,67 @@ export default defineComponent({
     // The index of the selected service on the current page
     const selectedServiceIndex = ref(-1)
 
-    // Import services from the composable
+    // Import required values and methods from the composables
+    const { getQueryParam, updateQueryParams, removeQueryParam } = useQueryParams()
     const { services, loading, getServices } = useServices()
-    const { currentPage, totalPages, totalCount, paginatedServices, nextPage, previousPage } = usePagination(services, pageSize)
-    const { getQueryParam, updateQueryParams } = useQueryParams()
+    const { currentPage, totalPages, totalCount, paginatedServices, nextPage, previousPage } = usePagination(
+      services,
+      pageSize,
+    )
 
-    // const intialSelectedServiceIndex = getQueryParam(QueryParams.SelectedService)
+    // ———— Mounted hook ————
 
-    onBeforeMount(() => {
+    // On component mount, get the initial search query and selected service index from the query params
+    onMounted(() => {
       const initialSearchQuery = getQueryParam(QueryParams.Search)
+      const intialSelectedServiceIndex = getQueryParam(QueryParams.SelectedService)
+
+      // If the search query parameter is present, set the searchQuery to the value of the search query parameter.
       if (initialSearchQuery && typeof initialSearchQuery === 'string') {
         searchQuery.value = initialSearchQuery
       }
 
+      // If the selected service query param is present, set the selectedServiceIndex to the value of the selected service param.
+      if (intialSelectedServiceIndex && typeof intialSelectedServiceIndex === 'string') {
+        const initialSelectedServiceIndex = Number(intialSelectedServiceIndex)
+        selectedServiceIndex.value =
+          Number.isInteger(initialSelectedServiceIndex) && initialSelectedServiceIndex >= 0
+            ? initialSelectedServiceIndex
+            : -1
+      }
+
+      // fetch services with the initial search query
       getServices(searchQuery.value)
+
     })
+
+    // ———— Methods ————
 
     // Extract the search string from the event, reset pagination and call the getServices method
     const searchHandler = (q: string) => {
       currentPage.value = 1
-      updateQueryParams({ [QueryParams.Search]: q, [QueryParams.Page]: '1' })
+
+      // If the search query is present, update the query params with the search query
+      // and reser page number to 1
+      if (q) {
+        updateQueryParams({ [QueryParams.Search]: q, [QueryParams.Page]: '1' })
+      } else {
+        // If the search query is empty, remove the search query param and page number from query params
+        removeQueryParam(QueryParams.Search)
+        removeQueryParam(QueryParams.Page)
+      }
+
       getServices(q)
+    }
+
+    const serviceCardClickHandler = (index: number) => {
+      if (index >= 0) {
+        updateQueryParams({ [QueryParams.SelectedService]: index.toString() })
+      } else {
+        removeQueryParam(QueryParams.SelectedService)
+      }
+
+      selectedServiceIndex.value = index
     }
 
     const getUniqueDeveloperList = (service: Service): Array<Developer> => {
@@ -125,6 +165,8 @@ export default defineComponent({
 
       return Object.values(developerMap)
     }
+
+    // ———— Computed properties ————
 
     // To reduce prop pollution in the template, using a computed property to pass
     // props and event handlers to the KPagination component
@@ -144,8 +186,11 @@ export default defineComponent({
     // A computed property to get the selected service data
     // This service will be shown in a modal
     const selectedServiceData = computed(() => {
-      // No. of items shown might be less than pageSize, hence use item count for max check instead of pageSize
-      if (selectedServiceIndex.value < 0 || selectedServiceIndex.value >= paginatedServices.value.length) return null
+      // If the selected service index is out of bounds, return null
+      // P.S.: number of items shown might be less than pageSize, hence used total services count for max check instead of pageSize
+      if (selectedServiceIndex.value < 0 || selectedServiceIndex.value >= paginatedServices.value.length) {
+        return null
+      }
 
       return paginatedServices.value[selectedServiceIndex.value]
     })
@@ -166,6 +211,7 @@ export default defineComponent({
       selectedServiceIndex,
       selectedServiceData,
       searchHandler,
+      serviceCardClickHandler,
       getUniqueDeveloperList,
     }
   },
@@ -192,8 +238,7 @@ export default defineComponent({
     height: 4.4rem;
 
     #search-input {
-
-      border: 1px solid #E7E7EC;
+      border: 1px solid #e7e7ec;
       border-radius: 0.4rem;
       gap: 8px;
       padding: 1rem 1.6rem;
@@ -202,10 +247,10 @@ export default defineComponent({
     }
 
     button.create-service {
-      background: #07A88D;
+      background: #07a88d;
       border: none;
       border-radius: 10rem;
-      color: #FFFFFF;
+      color: #ffffff;
       font-size: 1.6rem;
       font-weight: 600;
       letter-spacing: 0px;
@@ -235,7 +280,6 @@ export default defineComponent({
       margin: 1.6rem 0 0 0;
     }
   }
-
 }
 
 .catalog {

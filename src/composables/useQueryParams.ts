@@ -1,27 +1,33 @@
-import { useRouter, type LocationQuery } from 'vue-router'
+import { useRouter, useRoute, type LocationQuery } from 'vue-router'
 
 export default function useQueryParams() {
-
-  const { push, currentRoute: { value: { query } } } = useRouter()
+  const router = useRouter()
+  const route = useRoute()
 
   function getQueryParam(key: string) {
-    return query[key]
+    return route.query[key]
   }
 
   async function updateQueryParams(newParams: LocationQuery) {
-    console.log('newParams', newParams)
-    console.log('before updating', { query })
-    await push({
+    await router.replace({
       query: {
-        ...query,
+        ...route.query,
         ...newParams,
       },
     })
-    console.log('after updating', { query })
+  }
+
+  async function removeQueryParam(key: string) {
+    const newQuery = { ...route.query }
+    delete newQuery[key]
+    await router.replace({
+      query: newQuery,
+    })
   }
 
   return {
     updateQueryParams,
     getQueryParam,
+    removeQueryParam,
   }
 }
