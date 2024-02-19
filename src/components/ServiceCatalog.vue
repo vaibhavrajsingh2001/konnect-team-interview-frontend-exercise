@@ -8,10 +8,10 @@
       <div class="action-bar">
         <input
           id="search-input"
-          v-model="searchQuery"
           v-debounce:350="searchHandler"
           data-testid="search-input"
           placeholder="Search"
+          :value="searchQuery"
         >
 
         <button class="create-service">
@@ -91,7 +91,7 @@ export default defineComponent({
     const selectedServiceIndex = ref(-1)
 
     // Import required values and methods from the composables
-    const { getQueryParam, updateQueryParams, removeQueryParam } = useQueryParams()
+    const { getQueryParam, updateQueryParams, removeQueryParams } = useQueryParams()
     const { services, loading, getServices } = useServices()
     const { currentPage, totalPages, totalCount, paginatedServices, nextPage, previousPage } = usePagination(
       services,
@@ -129,6 +129,7 @@ export default defineComponent({
     // Extract the search string from the event, reset pagination and call the getServices method
     const searchHandler = (q: string) => {
       currentPage.value = 1
+      searchQuery.value = q
 
       // If the search query is present, update the query params with the search query
       // and reser page number to 1
@@ -136,8 +137,7 @@ export default defineComponent({
         updateQueryParams({ [QueryParams.Search]: q, [QueryParams.Page]: '1' })
       } else {
         // If the search query is empty, remove the search query param and page number from query params
-        removeQueryParam(QueryParams.Search)
-        removeQueryParam(QueryParams.Page)
+        removeQueryParams([QueryParams.Search, QueryParams.Page])
       }
 
       getServices(q)
@@ -147,7 +147,7 @@ export default defineComponent({
       if (index >= 0) {
         updateQueryParams({ [QueryParams.SelectedService]: index.toString() })
       } else {
-        removeQueryParam(QueryParams.SelectedService)
+        removeQueryParams([QueryParams.SelectedService])
       }
 
       selectedServiceIndex.value = index

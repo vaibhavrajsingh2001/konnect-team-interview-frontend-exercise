@@ -17,9 +17,12 @@ export default function useQueryParams() {
     })
   }
 
-  async function removeQueryParam(key: string) {
+  async function removeQueryParams(keys: string[]) {
     const newQuery = { ...route.query }
-    delete newQuery[key]
+    keys.forEach((key) => {
+      delete newQuery[key]
+    })
+
     await router.replace({
       query: newQuery,
     })
@@ -28,6 +31,6 @@ export default function useQueryParams() {
   return {
     updateQueryParams,
     getQueryParam,
-    removeQueryParam,
+    removeQueryParams,
   }
 }
