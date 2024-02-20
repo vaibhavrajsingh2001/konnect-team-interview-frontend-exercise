@@ -264,6 +264,10 @@ export default defineComponent({
   margin: 4rem auto;
   // Add padding to the sides
   padding: 0 4rem;
+
+  @media screen and (max-width: 960px) {
+    padding: 0 2rem;
+  }
 }
 
 .page-header {
