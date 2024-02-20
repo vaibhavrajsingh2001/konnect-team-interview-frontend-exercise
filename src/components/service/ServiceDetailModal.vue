@@ -29,7 +29,7 @@
 import { defineComponent, type PropType } from 'vue'
 
 import KModal from '@/components/common/KModal.vue'
-import ServiceVersionCard from '@/components/ServiceVersionCard.vue'
+import ServiceVersionCard from '@/components/service/ServiceVersionCard.vue'
 
 import type { Service, Version } from '@/types'
 

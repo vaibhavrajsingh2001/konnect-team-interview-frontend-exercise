@@ -1,0 +1,29 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ServiceCard > renders correctly with metrics and developers 1`] = `
+"<li class="service-card">
+  <div class="service-card-header"><span>Unpublished</span>
+    <div class="version-badge">1 version</div>
+  </div>
+  <p class="service-name">Test Service</p>
+  <p class="service-description">This is a test service</p>
+  <div class="service-metrics-and-avatars">
+    <service-metrics-stub latency="0.5" uptime="0.9278" requests="248393" errors="0.0244"></service-metrics-stub>
+    <k-avatar-group-stub avatarlist="[object Object],[object Object],[object Object]"></k-avatar-group-stub>
+  </div>
+</li>"
+`;
+
+exports[`ServiceCard > renders correctly with no metrics or developers 1`] = `
+"<li class="service-card">
+  <div class="service-card-header"><span>Published to portal</span>
+    <div class="version-badge">2 versions</div>
+  </div>
+  <p class="service-name">Test Service</p>
+  <p class="service-description">This is a test service</p>
+  <div class="service-metrics-and-avatars">
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+</li>"
+`;

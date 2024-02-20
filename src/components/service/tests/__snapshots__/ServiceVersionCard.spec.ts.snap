@@ -1,0 +1,14 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ServiceVersionCard > renders correctly with developers 1`] = `
+"<li class="version-card">
+  <div class="version-details"><span class="version-name">v1.0.0</span><span class="version-description" title="Test description">Test description</span><span class="service-type rest-bg-color">REST</span></div><span class="developer-details"><k-avatar-stub avatarurl="https://avatars.githubusercontent.com/u/55118358" email="Oscar.Brown87@yahoo.com" name="Oscar Brown"></k-avatar-stub><div><p class="developer-name">Oscar Brown</p><p class="service-updated-at">2 years ago</p></div></span>
+</li>"
+`;
+
+exports[`ServiceVersionCard > renders correctly with no developers 1`] = `
+"<li class="version-card">
+  <div class="version-details"><span class="version-name">v1.0.0</span><span class="version-description" title="Test description">Test description</span><span class="service-type http-bg-color">HTTP</span></div>
+  <!--v-if-->
+</li>"
+`;

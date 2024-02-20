@@ -33,7 +33,7 @@
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue'
 
-import ServiceMetrics from '@/components/ServiceMetrics.vue'
+import ServiceMetrics from '@/components/service/ServiceMetrics.vue'
 import KAvatarGroup from '@/components/common/KAvatarGroup.vue'
 import { ServiceStatus, type Developer, type Metrics } from '@/types'
 
@@ -112,7 +112,7 @@ export default defineComponent({
 .service-card {
   background-color: #FFFFFF;
   border-radius: 0.2rem;
-  // Shadows make the card look elevated, hence better looking :)
+  // Shadows make the card look elevated, a little better looking :)
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   cursor: pointer;
   height: 24rem;

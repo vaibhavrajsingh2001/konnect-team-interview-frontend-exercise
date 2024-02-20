@@ -51,10 +51,6 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    developer: {
-      type: Object as PropType<Developer>,
-      default: null,
-    },
     updatedAt: {
       type: String,
       required: true,
@@ -63,6 +59,10 @@ export default defineComponent({
       type: String as PropType<Service['type']>,
       required: true,
       validator: (value: string) => ['REST', 'HTTP'].includes(value),
+    },
+    developer: {
+      type: Object as PropType<Developer>,
+      default: null,
     },
   },
   methods: { fromNow },

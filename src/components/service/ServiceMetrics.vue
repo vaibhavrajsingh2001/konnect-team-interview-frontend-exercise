@@ -56,16 +56,19 @@ export default defineComponent({
         {
           label: 'latency',
           value: `${this.latency}ms`,
+          // FAIL: latency > 1ms, WARN: latency 0.5ms - 1ms, PASS: latency <= 0.5ms
           ellipseColor: this.latency > 1 ? EllipseColor.FAIL : this.latency > 0.5 ? EllipseColor.WARN : EllipseColor.PASS,
         },
         {
           label: 'uptime',
           value: `${this.decimalToPercentage(this.uptime)}%`,
+          // FAIL: uptime < 0.7, WARN: uptime 0.7 - 0.9, PASS: uptime >= 0.9
           ellipseColor: this.uptime < 0.7 ? EllipseColor.FAIL : this.uptime < 0.9 ? EllipseColor.WARN : EllipseColor.PASS,
         },
         {
           label: 'errors',
           value: `${this.decimalToPercentage(this.errors)}%`,
+          // FAIL: errors > 0.3, WARN: errors 0.1 - 0.3, PASS: errors <= 0.1
           ellipseColor: this.errors > 0.3 ? EllipseColor.FAIL : this.errors > 0.1 ? EllipseColor.WARN : EllipseColor.PASS,
         },
         {

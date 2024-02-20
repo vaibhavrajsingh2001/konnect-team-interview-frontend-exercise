@@ -71,8 +71,8 @@
 import { computed, defineComponent, onMounted, ref } from 'vue'
 
 import KPagination from '@/components/common/KPagination.vue'
-import ServiceDetailModal from '@/components/ServiceDetailModal.vue'
-import ServiceCard from '@/components/ServiceCard.vue'
+import ServiceDetailModal from '@/components/service/ServiceDetailModal.vue'
+import ServiceCard from '@/components/service/ServiceCard.vue'
 
 import useServices from '@/composables/useServices'
 import usePagination from '@/composables/usePagination'
