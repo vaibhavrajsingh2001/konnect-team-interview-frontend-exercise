@@ -23,7 +23,17 @@
       </div>
     </div>
 
-    <template v-if="paginatedServices.length">
+    <template v-if="loading">
+      <ul class="catalog">
+        <li
+          v-for="ii in pageSize"
+          :key="ii"
+          class="service-card-skeleton-loader"
+        />
+      </ul>
+    </template>
+
+    <template v-else-if="paginatedServices.length">
       <ul class="catalog">
         <service-card
           v-for="(service, index) in paginatedServices"
@@ -213,6 +223,7 @@ export default defineComponent({
 
     return {
       loading,
+      pageSize,
       searchQuery,
       paginatedServices,
       paginationParams,
@@ -310,6 +321,20 @@ export default defineComponent({
   list-style: none;
   margin-top: 2.4rem;
   padding: 0;
+
+  .service-card-skeleton-loader {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    background: gainsboro;
+    border-radius: 0.2rem;
+    height: 24rem;
+    width: 42rem;
+
+    @keyframes pulse {
+      50% {
+        opacity: .5;
+      }
+    }
+  }
 }
 
 .empty-state {

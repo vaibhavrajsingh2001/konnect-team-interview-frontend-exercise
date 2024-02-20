@@ -8,7 +8,11 @@ export default function useServices() {
   const error = ref<NetworkError | null>(null)
 
   const getServices = async (q?: string): Promise<void> => {
-    loading.value = true
+    // Only set loading to true if the request takes longer than 50ms
+    // This prevents the loading spinner from flashing briefly on the screen
+    const loadingTimout = setTimeout(() => {
+      loading.value = true
+    }, 50)
 
     try {
       const response: AxiosResponse<Service[]> = await axios.get('/api/services', { params: { q } })
@@ -32,6 +36,7 @@ export default function useServices() {
         }
       }
     } finally {
+      clearTimeout(loadingTimout)
       loading.value = false
     }
   }
