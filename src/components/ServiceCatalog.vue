@@ -45,9 +45,10 @@
 
     <div
       v-else
+      class="empty-state"
       data-testid="no-results"
     >
-      No services
+      {{ searchQuery ? `No results found for '${searchQuery}'` : 'No services created yet.' }}
     </div>
 
     <Teleport to="#k-modal-root">
@@ -300,5 +301,13 @@ export default defineComponent({
   list-style: none;
   margin-top: 2.4rem;
   padding: 0;
+}
+
+.empty-state {
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 2.4rem;
+  margin-top: 25rem;
+  text-align: center;
 }
 </style>
