@@ -123,7 +123,7 @@ export default defineComponent({
   display: flex;
   gap: 0.6rem;
   justify-content: start;
-  text-align: left;
+  text-align: right;
 
   .k-avatar {
     height: 2rem;
