@@ -40,6 +40,38 @@ Common components:
 -   `ServiceCard` is the card component used on the service catalog page to show the details of a service.
 -   `ServiceMetrics` are used inside `ServiceCard` to show the metrics of a service.
 
+## Previews
+
+### Demo
+
+
+https://github.com/vaibhavrajsingh2001/konnect-team-interview-frontend-exercise/assets/47082523/df9952a6-02b6-4e62-be0c-7b74b699e6d6
+
+
+
+### List of services
+
+<img width="1436" alt="image" src="https://github.com/vaibhavrajsingh2001/konnect-team-interview-frontend-exercise/assets/47082523/086fd370-c812-4dc6-a694-6bc5740f5f55">
+
+### Search empty state
+
+<img width="1436" alt="image" src="https://github.com/vaibhavrajsingh2001/konnect-team-interview-frontend-exercise/assets/47082523/714f5da2-f965-4651-aa01-b3ae6b86c755">
+
+### Error state
+
+<img width="1438" alt="image" src="https://github.com/vaibhavrajsingh2001/konnect-team-interview-frontend-exercise/assets/47082523/47fd4e41-aba4-47c0-92e5-dd2b071b9dba">
+
+### Service details with versions
+
+<img width="1436" alt="image" src="https://github.com/vaibhavrajsingh2001/konnect-team-interview-frontend-exercise/assets/47082523/73d22092-2f5f-43f3-8f79-53035ad9ef49">
+
+### Mobile views
+
+<img width="323" alt="image" src="https://github.com/vaibhavrajsingh2001/konnect-team-interview-frontend-exercise/assets/47082523/f97c645d-7a55-4f69-8bb9-4172eb77ea93">
+
+<img width="325" alt="image" src="https://github.com/vaibhavrajsingh2001/konnect-team-interview-frontend-exercise/assets/47082523/020a4f94-b331-403d-b82a-9c75996ad5d2">
+
+
 
 # Welcome
 
