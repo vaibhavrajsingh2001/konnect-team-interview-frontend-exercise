@@ -32,7 +32,7 @@
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue'
 
-import KAvatar from '@/components/KAvatar.vue'
+import KAvatar from '@/components/common/KAvatar.vue'
 
 import { fromNow } from '@/util'
 import type { Developer, Service } from '@/types'

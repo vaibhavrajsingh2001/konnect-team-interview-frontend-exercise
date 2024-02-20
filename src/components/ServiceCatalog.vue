@@ -66,7 +66,7 @@
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref } from 'vue'
 
-import KPagination from '@/components/KPagination.vue'
+import KPagination from '@/components/common/KPagination.vue'
 import ServiceDetailModal from '@/components/ServiceDetailModal.vue'
 import ServiceCard from '@/components/ServiceCard.vue'
 

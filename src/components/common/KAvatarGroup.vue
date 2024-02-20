@@ -21,7 +21,7 @@
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue'
 
-import KAvatar from '@/components/KAvatar.vue'
+import KAvatar from '@/components/common/KAvatar.vue'
 import type { Developer } from '@/types'
 
 export default defineComponent({

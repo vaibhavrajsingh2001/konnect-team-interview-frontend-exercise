@@ -34,7 +34,7 @@
 import { defineComponent, type PropType } from 'vue'
 
 import ServiceMetrics from '@/components/ServiceMetrics.vue'
-import KAvatarGroup from '@/components/KAvatarGroup.vue'
+import KAvatarGroup from '@/components/common/KAvatarGroup.vue'
 import { ServiceStatus, type Developer, type Metrics } from '@/types'
 
 export default defineComponent({

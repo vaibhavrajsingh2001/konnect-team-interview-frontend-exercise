@@ -28,7 +28,7 @@
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue'
 
-import KModal from '@/components/KModal.vue'
+import KModal from '@/components/common/KModal.vue'
 import ServiceVersionCard from '@/components/ServiceVersionCard.vue'
 
 import type { Service, Version } from '@/types'
