@@ -14,7 +14,10 @@
           :value="searchQuery"
         >
 
-        <button class="create-service">
+        <button
+          class="create-service"
+          @click="handleCreateServiceClick"
+        >
           + Service Package
         </button>
       </div>
@@ -155,6 +158,10 @@ export default defineComponent({
       selectedServiceIndex.value = index
     }
 
+    const handleCreateServiceClick = () => {
+      alert('Create service clicked')
+    }
+
     const getUniqueDeveloperList = (service: Service): Array<Developer> => {
       // Maintain a map of developer ID to developer object to only add unique developers
       const developerMap: Record<string, Developer> = {}
@@ -215,6 +222,7 @@ export default defineComponent({
       searchHandler,
       serviceCardClickHandler,
       getUniqueDeveloperList,
+      handleCreateServiceClick,
     }
   },
 })
@@ -259,6 +267,7 @@ export default defineComponent({
       border: none;
       border-radius: 10rem;
       color: #ffffff;
+      cursor: pointer;
       font-size: 1.6rem;
       font-weight: 600;
       letter-spacing: 0px;
