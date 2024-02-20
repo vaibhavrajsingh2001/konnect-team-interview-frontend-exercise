@@ -1,3 +1,46 @@
+# Considerations and assumptions
+
+-   All filters, search, pagination and selected service are stored in the URL. This allows for easy sharing of the current state of the application.
+-   I've used a modal to show service details instead of a separate page because there wasn't much data to show for the service details. This also allows for a better user experience as the user doesn't have to navigate back and forth between pages when viewing multiple services.
+-   This modal can be closed by either pressing the escape key or clicking outside the modal. This is a common pattern for modals and is expected by the user.
+-   The modal opens from the bottom on smaller screens, making it easier to scroll through on mobile.
+-   Every developer avatar has the developer's name and email in it's title attribute. This is useful for the user to know who the developer is and to contact them if needed. In case of overflowed avatars (more than 3), the details of all overflow developers are added in the title attribute on the extra avatar count element.
+
+2 libraries were also added to the project:
+
+-   `date-fns` for getting the relative time of the last updated date. I could've written a custom function to do this by extracting the diff of days, months and years from last updated date and current date, but `date-fns` is a well tested and widely used library which accomodates for edge cases like leap years, better approximation, etc. It's also tree-shakable so it doesn't add much to the bundle size since I'm only using one util method from it.
+-   `vue-router-mock` to mock vue router in the tests. This is a simple library that allows for easy mocking of the router in the tests. This is used to mock the router in the tests for the `ServiceCatalog` component.
+
+## Composables
+
+-   `usePagination` is a separate composable so that it can be easliy dropped in any component that needs pagination. This allows for reusability and separation of concerns.
+-   `useQueryParams` is a composable that allows for easy updation of the URL query parameters. This allows for easy sharing of the current state of the application.
+-   `useServices` is a composable that fetches the services from the API and allows search via the `q` query parameter. This composable then passes the services to the `usePagination` composable to paginate the services, which is finally consumed to show the list of services.
+
+## Components
+
+All components are built without any business logic and are only responsible for rendering the UI. All data is passed via props. This makes understanding flow of data easier.
+
+The main component is `ServiceCatalog` which is responsible for showing the list of services. All data fetching happens inside it and all state is also stored in it. This makes it the single source of truth for all data on the page.
+
+Tests for all common components are under the `components/common/tests` directory and tests for the `service` components are under the `components/service/tests` directory. I've used snapshot testing and unit testing.
+
+Common components:
+
+-   `KModal` is a base component for creating modals.
+-   `KAvatar` is a base component for using avatars.
+-   `KAvatarGroup` uses `KAvatar` to show a group of avatars and also handles the overflow of avatars.
+-   `KPagination` is a drop in component to show pagination.
+-   `AppHeader` is for the navbar at the top of the page.
+
+`Service` components:
+
+-   `ServiceDetailsModal` is the modal component that shows the details and versions of the selected service. Can be closed via escape key or clicking outside the modal.
+-   `ServiceVersionCard` are the card components used inside `ServiceDetailsModal` to show the versions of a service.
+-   `ServiceCard` is the card component used on the service catalog page to show the details of a service.
+-   `ServiceMetrics` are used inside `ServiceCard` to show the metrics of a service.
+
+
 # Welcome
 
 Please take the time to read through all of the sections below; we want you to do great! :rocket:
@@ -8,44 +51,44 @@ Feel free to reach out to your recruiting contact with any questions or concerns
 
 Modify the provided Vue 3 app to match [this mock](https://www.figma.com/file/swzJVL624G434CVdWi3FLv/Core-UI-Team-Project) as closely as possible while utilizing best-practices to improve the codebase and implement the functional requirements outlined below.
 
-- The provided exercise files are a starting point and they have room for improvement; feel free to modify
-- Don't treat the mock as gospel -- if you see things that don't make sense, ask questions or implement what you think is right
-- In the exercise you are utilizing a local API; however, code your submission as if you are using a production API, accounting for typical issues that can occur
+-   The provided exercise files are a starting point and they have room for improvement; feel free to modify
+-   Don't treat the mock as gospel -- if you see things that don't make sense, ask questions or implement what you think is right
+-   In the exercise you are utilizing a local API; however, code your submission as if you are using a production API, accounting for typical issues that can occur
 
 ### Links
 
-- Figma Mock: <https://www.figma.com/file/swzJVL624G434CVdWi3FLv/Core-UI-Team-Project>
+-   Figma Mock: <https://www.figma.com/file/swzJVL624G434CVdWi3FLv/Core-UI-Team-Project>
 
 ## Functional Requirements
 
-- [Vue 3](https://vuejs.org/) and TypeScript
-- User should be able to view the name, a brief description, versions available, and other info shown in the mock for services
-- User should be able to search for services ([See search endpoint details below](#searching-the-services-endpoint))
-- User should be able to click on a service to view more details
-- User should be able to paginate through services (client-side implementation)
-- The create Service Package button doesn't have to be operable -- interacting with this elements could do nothing, could be fully implemented (stretch goal), or something in between
-- Please update the `README` in the project with a section to describe your design considerations, assumptions, and trade-offs made during this exercise. Also feel free to include any notes about your submission
+-   [Vue 3](https://vuejs.org/) and TypeScript
+-   User should be able to view the name, a brief description, versions available, and other info shown in the mock for services
+-   User should be able to search for services ([See search endpoint details below](#searching-the-services-endpoint))
+-   User should be able to click on a service to view more details
+-   User should be able to paginate through services (client-side implementation)
+-   The create Service Package button doesn't have to be operable -- interacting with this elements could do nothing, could be fully implemented (stretch goal), or something in between
+-   Please update the `README` in the project with a section to describe your design considerations, assumptions, and trade-offs made during this exercise. Also feel free to include any notes about your submission
 
 ## Additional Considerations (if applicable)
 
-- The UI should be responsive and look great at different browser viewport sizes
-- Pixel-perfect implementation
-- Routing and views (e.g. navigating to a given service from its card)
-- State management with [Pinia](https://pinia.vuejs.org/)
-- [Component Tests and/or Unit Tests](#run-component-and-unit-tests-with-vitest-and-optionally-vue-test-utils)
-- Other items covered in your Panel 1 interview
+-   The UI should be responsive and look great at different browser viewport sizes
+-   Pixel-perfect implementation
+-   Routing and views (e.g. navigating to a given service from its card)
+-   State management with [Pinia](https://pinia.vuejs.org/)
+-   [Component Tests and/or Unit Tests](#run-component-and-unit-tests-with-vitest-and-optionally-vue-test-utils)
+-   Other items covered in your Panel 1 interview
 
 ## Evaluation
 
 We will review your code for quality and your ability to talk through it, how you approach the UI, and what tradeoffs you make. Specifically we'll be looking at the following:
 
-- How closely your implementation matches the design along with the other [Functional Requirements](#functional-requirements)
-- Code quality, including appropriate componentization and modularity
-- TypeScript usage
-- Coding (and Vue) best-practices
-- The project should pass type checking and build successfully
-- How you dedicate the allotted time to focus on your strengths
-- Test coverage, if applicable
+-   How closely your implementation matches the design along with the other [Functional Requirements](#functional-requirements)
+-   Code quality, including appropriate componentization and modularity
+-   TypeScript usage
+-   Coding (and Vue) best-practices
+-   The project should pass type checking and build successfully
+-   How you dedicate the allotted time to focus on your strengths
+-   Test coverage, if applicable
 
 ## How to submit the project
 
@@ -105,10 +148,10 @@ The search endpoint is configured to search the following fields for each servic
 
 ```ts
 {
-  id: string;
-  name: string;
-  description: string;
-  type: string;
+    id: string;
+    name: string;
+    description: string;
+    type: string;
 }
 ```
 
