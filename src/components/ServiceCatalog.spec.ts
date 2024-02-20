@@ -1,5 +1,7 @@
-import { vi, describe, it, expect } from 'vitest'
+import { vi, describe, it, expect, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
+import { createRouterMock, injectRouterMock } from 'vue-router-mock'
+
 import ServiceCatalog from './ServiceCatalog.vue'
 import servicesData from '../../mocks/services'
 
@@ -24,6 +26,11 @@ vi.mock('axios', async () => {
 
 // Example component test for ServiceCatalog.vue
 describe('ServiceCatalog', () => {
+  const router = createRouterMock()
+  beforeEach(() => {
+    injectRouterMock(router)
+  })
+
   it('shows the search input', async () => {
     // No `mockedResponses` modification needed; just use the default mocked response
     const wrapper = mount(ServiceCatalog)
