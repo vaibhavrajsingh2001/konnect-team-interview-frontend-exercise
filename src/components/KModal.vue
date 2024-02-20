@@ -1,17 +1,14 @@
 <template>
-  <div class="k-modal">
+  <div
+    class="k-modal"
+    @click="handleModalClick"
+    @touchstart="handleModalClick"
+  >
     <div
       aria-modal="true"
       class="k-modal-container"
       role="dialog"
     >
-      <slot name="close">
-        <div class="k-modal-close">
-          <button @click="$emit('close')">
-            &#x58;
-          </button>
-        </div>
-      </slot>
       <div class="k-modal-content">
         <slot />
       </div>
@@ -37,6 +34,15 @@ export default defineComponent({
         this.$emit('close')
       }
     },
+    // Close the modal if the user clicks outside of the modal content
+    handleModalClick(e: MouseEvent | TouchEvent): void {
+
+      if (e.target === e.currentTarget) {
+        this.$emit('close')
+      }
+      // When clicking inside modal, target !== currentTarget => { target: p.versions, currentTarget: div.k-modal }
+      // When clicking outside modal, target === currentTarget => { target: div.k-modal, currentTarget: div.k-modal }
+    },
   },
 })
 </script>
@@ -61,35 +67,7 @@ export default defineComponent({
   overflow-y: auto;
 }
 
-.k-modal-close {
-  display: flex;
-  justify-content: flex-end;
-  padding: 1.5rem;
-  padding-bottom: 0rem;
-
-  button {
-    align-items: center;
-    background-color: #BDD3F9FF;
-    border: 1px solid #00000033;
-    border-radius: 50%;
-    color: #003694FF;
-    cursor: pointer;
-    display: inline-flex;
-    font-size: 1.6rem;
-    font-weight: 600;
-    height: 3rem;
-    justify-content: center;
-    padding: 1rem;
-    width: 3rem;
-
-    &:hover {
-      background-color: #8AB3FAFF;
-    }
-  }
-}
-
 .k-modal-content {
   padding: 3.2rem;
-  padding-top: 0;
 }
 </style>
