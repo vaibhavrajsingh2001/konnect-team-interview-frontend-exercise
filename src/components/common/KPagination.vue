@@ -1,18 +1,23 @@
 <template>
   <div class="k-pagination">
     <button
+      data-testid="previous-button"
       :disabled="disablePreviousButton"
       @click="$emit('previous')"
     >
       ←
     </button>
 
-    <span class="current-page">
+    <span
+      class="current-page"
+      data-testid="current-page-label"
+    >
       {{ firstItemIndex }} to {{ lastItemIndex }}
       <span class="total-count">of {{ totalCount }} services</span>
     </span>
 
     <button
+      data-testid="next-button"
       :disabled="disableNextButton"
       @click="$emit('next')"
     >

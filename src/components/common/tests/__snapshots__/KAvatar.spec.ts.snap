@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`KAvatar > renders correctly 1`] = `"<img alt="Example image" class="k-avatar" src="https://example.com/image.jpg" title="Example image &lt;sample@sample.com&gt;">"`;

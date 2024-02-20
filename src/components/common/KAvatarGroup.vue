@@ -12,6 +12,7 @@
     <span
       v-if="extraAvatarCount > 0"
       class="k-avatar-extra"
+      data-testid="k-extra-avatar-count"
       :title="extraAvatarTitle"
     >
       +{{ extraAvatarCount }}

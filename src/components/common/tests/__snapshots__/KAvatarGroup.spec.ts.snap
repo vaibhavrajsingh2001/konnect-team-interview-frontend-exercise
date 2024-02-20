@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`KAvatarGroup > renders correctly for 2 developers 1`] = `"<div class="k-avatar-group"><!--[--><img alt="Timmy Rosenbaum" class="k-avatar" src="https://avatars.githubusercontent.com/u/16572492" title="Timmy Rosenbaum &lt;Timmy_Rosenbaum@hotmail.com&gt;"><img alt="Theodore Aufderhar" class="k-avatar" src="https://avatars.githubusercontent.com/u/64255661" title="Theodore Aufderhar &lt;Theodore_Aufderhar@hotmail.com&gt;"><!--]--><!-- Element to show extra avatar count --><!--v-if--></div>"`;
+
+exports[`KAvatarGroup > renders extra avatar correctly 1`] = `
+"<div class="k-avatar-group"><img alt="Timmy Rosenbaum" class="k-avatar" src="https://avatars.githubusercontent.com/u/16572492" title="Timmy Rosenbaum <Timmy_Rosenbaum@hotmail.com>"><img alt="Theodore Aufderhar" class="k-avatar" src="https://avatars.githubusercontent.com/u/64255661" title="Theodore Aufderhar <Theodore_Aufderhar@hotmail.com>"><!-- Element to show extra avatar count --><span class="k-avatar-extra" data-testid="k-extra-avatar-count" title="Tanya Ferry <Tanya.Ferry47@yahoo.com> 
+
+Clayton Bins <Clayton_Bins30@gmail.com> "> +2</span></div>"
+`;
