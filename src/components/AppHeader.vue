@@ -22,7 +22,7 @@
           width="14px"
         >
       </div>
-      <span>Katherine Ellis</span>
+      <span class="profile-username">Katherine Ellis</span>
     </div>
   </header>
 </template>
@@ -38,13 +38,13 @@ export default defineComponent({
 <style lang="scss" scoped>
 header {
   align-items: center;
-
   color: rgb(255 255 255 / 0.8);
   display: flex;
   height: 7rem;
   justify-content: space-between;
   position: sticky;
   top: 0;
+  width: 100%;
 }
 
 .nav {
@@ -77,16 +77,24 @@ header {
   font-weight: 500;
   height: 100%;
   padding: 0 2rem;
-}
 
-.avatar-container {
-  align-items: center;
-  background-color: #0A7FAE;
-  border-radius: 100%;
+  .avatar-container {
+    align-items: center;
+    background-color: #0A7FAE;
+    border-radius: 100%;
 
-  display: flex;
-  height: 3rem;
-  justify-content: center;
-  width: 3rem;
+    display: flex;
+    height: 3rem;
+    justify-content: center;
+    width: 3rem;
+  }
+
+  .profile-username {
+    font-size: 1.5rem;
+
+    @media screen and (max-width: 960px) {
+      display: none;
+    }
+  }
 }
 </style>

@@ -72,8 +72,9 @@ import ServiceCard from '@/components/ServiceCard.vue'
 
 import useServices from '@/composables/useServices'
 import usePagination from '@/composables/usePagination'
-import { QueryParams, type Developer, type Service } from '@/types'
 import useQueryParams from '@/composables/useQueryParams'
+
+import { QueryParams, type Developer, type Service } from '@/types'
 
 export default defineComponent({
   name: 'ServiceCatalog',
@@ -229,8 +230,14 @@ export default defineComponent({
 .page-header {
   align-items: start;
   display: flex;
+  gap: 2rem;
   justify-content: space-between;
   margin-bottom: 2rem;
+
+  @media screen and (max-width: 960px) {
+    flex-direction: column;
+    margin-bottom: 4rem;
+  }
 
   .action-bar {
     column-gap: 2.4rem;
@@ -259,6 +266,10 @@ export default defineComponent({
       padding-left: 1.6rem;
       text-align: center;
       width: 20rem;
+
+      @media screen and (max-width: 960px) {
+        display: none;
+      }
     }
   }
 
