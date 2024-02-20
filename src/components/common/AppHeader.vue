@@ -4,12 +4,28 @@
       <router-link to="/">
         <img
           alt="Kong logo"
-          src="/kong-logo.png"
+          src="/kong-logo.svg"
         >
       </router-link>
       <div class="org-setting">
-        <span>Organization</span>
-        <span>Settings</span>
+        <span class="org-setting-item">
+          <img
+            alt="organization icon"
+            height="20px"
+            src="/icons/organization.svg"
+            width="20px"
+          >
+          Organization
+        </span>
+        <span class="org-setting-item">
+          <img
+            alt="organization icon"
+            height="20px"
+            src="/icons/settings.svg"
+            width="20px"
+          >
+          Settings
+        </span>
       </div>
     </div>
 
@@ -50,14 +66,12 @@ header {
 
 .nav {
   align-items: center;
-
   background: linear-gradient(180deg, #09224F 0%, #073382 100%);
   display: flex;
-
   flex-grow: 1;
-
   font-size: 1.5rem;
   font-weight: 600;
+  gap: 2rem;
   height: 100%;
   justify-content: space-between;
   letter-spacing: 0em;
@@ -67,7 +81,19 @@ header {
 
 .org-setting {
   column-gap: 2.6rem;
-  display: flex
+  display: flex;
+
+  .org-setting-item {
+    align-items: center;
+    column-gap: 1.2rem;
+    display: flex;
+
+    @media screen and (max-width: 512px){
+      img {
+        display: none;
+      }
+    }
+  }
 }
 
 .profile {

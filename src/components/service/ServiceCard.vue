@@ -1,7 +1,10 @@
 <template>
   <li class="service-card">
     <div class="service-card-header">
-      <span>{{ statusParams.text }}</span>
+      <span class="service-status">
+        <img :src="`/icons/${statusParams.icon}.svg`">
+        {{ statusParams.text }}
+      </span>
 
       <div
         v-if="versionCount"
@@ -91,15 +94,15 @@ export default defineComponent({
       const statusParamMap = {
         [ServiceStatus.Unpublished]: {
           text: 'Unpublished',
-          color: '#ADB6C8',
+          icon: 'cross',
         },
         [ServiceStatus.Published]: {
           text: 'Published to portal',
-          color: '#14B59A',
+          icon: 'check',
         },
         [ServiceStatus.InProgress]: {
           text: 'In progress',
-          color: '#FABE5F',
+          icon: 'loading',
         },
       }
       return statusParamMap[this.serviceStatus]
@@ -128,6 +131,16 @@ export default defineComponent({
     justify-content: space-between;
     line-height: 1.6rem;
     margin-bottom: 1rem;
+
+    .service-status {
+      align-items: center;
+      display: flex;
+      gap: 0.8rem;
+
+      img {
+        height: 1rem;
+      }
+    }
 
     .version-badge {
       background-color: #F2F6FE;
