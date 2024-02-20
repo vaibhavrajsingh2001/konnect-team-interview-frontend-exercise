@@ -55,13 +55,16 @@ export default defineComponent({
   inset: 0px;
   justify-content: center;
   position: fixed;
+
+  @media screen and (max-width: 960px){
+    align-items: end;
+  }
 }
 
 .k-modal-container {
   background-color: #FFFFFF;
   border-radius: 0.4rem;
   box-shadow: 0px 4px 30px 0px #00000033;
-  margin: 0 4rem;
   max-height: 50vh;
   max-width: 83rem;
   overflow-y: auto;
