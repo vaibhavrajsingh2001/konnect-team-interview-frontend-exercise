@@ -11,6 +11,7 @@
           v-debounce:350="searchHandler"
           data-testid="search-input"
           placeholder="Search"
+          type="search"
           :value="searchQuery"
         >
 
@@ -283,6 +284,7 @@ export default defineComponent({
     height: 4.4rem;
 
     #search-input {
+      background-color: #FFFFFF;
       border: 1px solid #e7e7ec;
       border-radius: 0.4rem;
       gap: 8px;
