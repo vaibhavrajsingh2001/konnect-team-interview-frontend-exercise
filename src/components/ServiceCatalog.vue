@@ -23,15 +23,23 @@
       </div>
     </div>
 
-    <template v-if="loading">
-      <ul class="catalog">
-        <li
-          v-for="ii in pageSize"
-          :key="ii"
-          class="service-card-skeleton-loader"
-        />
-      </ul>
-    </template>
+    <ul
+      v-if="loading"
+      class="catalog"
+    >
+      <li
+        v-for="ii in pageSize"
+        :key="ii"
+        class="service-card-skeleton-loader"
+      />
+    </ul>
+
+    <div
+      v-else-if="errorCopytext"
+      class="empty-state"
+    >
+      {{ errorCopytext }}
+    </div>
 
     <template v-else-if="paginatedServices.length">
       <ul class="catalog">
@@ -107,7 +115,7 @@ export default defineComponent({
 
     // Import required values and methods from the composables
     const { getQueryParam, updateQueryParams, removeQueryParams } = useQueryParams()
-    const { services, loading, getServices } = useServices()
+    const { services, loading, error, getServices } = useServices()
     const { currentPage, totalPages, totalCount, paginatedServices, nextPage, previousPage } = usePagination(
       services,
       pageSize,
@@ -221,8 +229,18 @@ export default defineComponent({
       type: selectedServiceData.value?.type,
     }))
 
+    const errorCopytext = computed(() => {
+      if (error.value?.code === '404' && searchQuery.value) {
+        return `No results found for '${searchQuery.value}'`
+      } else if (error.value?.message) {
+        return `An error occurred while fetching services: ${error.value.message}`
+      }
+      return ''
+    })
+
     return {
       loading,
+      errorCopytext,
       pageSize,
       searchQuery,
       paginatedServices,
