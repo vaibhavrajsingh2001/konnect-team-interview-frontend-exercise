@@ -137,7 +137,7 @@ export default defineComponent({
         updateQueryParams({ [QueryParams.Search]: q, [QueryParams.Page]: '1' })
       } else {
         // If the search query is empty, remove the search query param and page number from query params
-        removeQueryParams([QueryParams.Search, QueryParams.Page])
+        removeQueryParams([QueryParams.Search])
       }
 
       getServices(q)
