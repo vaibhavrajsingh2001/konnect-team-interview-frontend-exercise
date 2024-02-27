@@ -2,7 +2,7 @@
 
 exports[`ServiceCard > renders correctly with metrics and developers 1`] = `
 "<li class="service-card">
-  <div class="service-card-header"><span>Unpublished</span>
+  <div class="service-card-header"><span class="service-status"><img src="/icons/cross.svg"> Unpublished</span>
     <div class="version-badge">1 version</div>
   </div>
   <p class="service-name">Test Service</p>
@@ -16,7 +16,7 @@ exports[`ServiceCard > renders correctly with metrics and developers 1`] = `
 
 exports[`ServiceCard > renders correctly with no metrics or developers 1`] = `
 "<li class="service-card">
-  <div class="service-card-header"><span>Published to portal</span>
+  <div class="service-card-header"><span class="service-status"><img src="/icons/check.svg"> Published to portal</span>
     <div class="version-badge">2 versions</div>
   </div>
   <p class="service-name">Test Service</p>
